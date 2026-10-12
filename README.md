@@ -5,8 +5,8 @@
 [![CI](https://github.com/akai-ito/ito-capabilities/actions/workflows/ci.yml/badge.svg)](https://github.com/akai-ito/ito-capabilities/actions/workflows/ci.yml)
 
 > [!NOTE]
-> Nothing is built yet. The first capability, the Thread, arrives in slice 2. The
-> [map](https://github.com/akai-ito/.github/blob/main/map.md) has the design and the plan.
+> Nothing is built yet. The first capability will be the Thread, your memory. The
+> [map](https://github.com/akai-ito/.github/blob/main/map.md) has the design.
 
 ## One operation, two doors
 
