@@ -21,7 +21,7 @@ a skill for the agent, and its operations, each with an input schema written in
 
 Every call goes through the server, so a capability that's off is refused at once, and each
 capability receives only its own setup values and secrets. The server and a capability speak the
-[capability protocol](https://github.com/akai-ito/ito-core/blob/main/protocol/capabilities.md);
+[capability protocol](https://github.com/akai-ito/ito-core/tree/main/protocol);
 `src/sdk` implements a capability's half of it, and `createTestCore` runs one in a test.
 
 ## Working on it
