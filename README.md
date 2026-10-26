@@ -5,8 +5,8 @@
 [![CI](https://github.com/akai-ito/ito-capabilities/actions/workflows/ci.yml/badge.svg)](https://github.com/akai-ito/ito-capabilities/actions/workflows/ci.yml)
 
 > [!NOTE]
-> The SDK is here, and Reports is the first capability on its way. Ito's server installs this
-> package with itself and runs each capability that's on as its own process.
+> The SDK and the first capability, Reports, are here. Ito's server installs this package with
+> itself and runs each capability that's on as its own process.
 
 ## One definition, every door
 
@@ -23,6 +23,10 @@ Every call goes through the server, so a capability that's off is refused at onc
 capability receives only its own setup values and secrets. The server and a capability speak the
 [capability protocol](https://github.com/akai-ito/ito-core/tree/main/protocol);
 `src/sdk` implements a capability's half of it, and `createTestCore` runs one in a test.
+
+| Capability | Kind | What it does |
+| --- | --- | --- |
+| [Reports](src/reports) | hand | Files the gaps Ari hits as public issues on Ito's repositories |
 
 ## Working on it
 
