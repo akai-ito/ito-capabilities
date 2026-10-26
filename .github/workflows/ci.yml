@@ -20,3 +20,56 @@ jobs:
   workflows:
     name: Workflows and scripts
     uses: akai-ito/.github/.github/workflows/workflows.yml@main
+
+  types:
+    name: TypeScript compiles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/node
+      - name: Type-check
+        run: npm run typecheck
+
+  lint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/node
+      - name: Lint
+        run: npm run lint
+
+  format:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/node
+      - name: Check formatting
+        run: npm run format:check
+
+  tests:
+    name: Tests pass
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/node
+      - name: Run the SDK and every capability against the test core
+        run: npm test
+
+  build:
+    name: Builds to JavaScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/node
+      - name: Build
+        run: npm run build
+      - name: Every capability answers as the server asks
+        run: |
+          for entry in $(node -p 'Object.values(require("./package.json").ito.capabilities).join(" ")'); do
+            if ! printf '{"id":1,"method":"initialize","params":{"protocol":"0.1"}}\n' | node "$entry" | grep -q '"manifest"'; then
+              echo "::error title=A capability doesn't start::$entry didn't answer initialize with its manifest."
+              exit 1
+            fi
+          done
